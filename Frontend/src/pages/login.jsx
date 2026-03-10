@@ -1,6 +1,7 @@
 
 
 import { useState } from "react";
+import Footer from "../components/footer";
 import { FaUser, FaLock, FaEnvelope, FaPhone } from "react-icons/fa";
 
 function Login() {
@@ -8,6 +9,7 @@ function Login() {
 const [isLogin,setIsLogin] = useState(true)
 
 return (
+    <>
  <div className="flex items-center justify-center min-h-screen bg-blue-600">
       
    
@@ -136,8 +138,11 @@ Create Account
 )}
 
 </div>
- </div>
 
+ </div>
+ 
+<Footer />
+</>
 )
 
 }
