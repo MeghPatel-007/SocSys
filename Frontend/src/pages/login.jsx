@@ -3,7 +3,10 @@
 import { useState } from "react";
 import Footer from "../components/footer";
 import { FaUser, FaLock, FaEnvelope, FaPhone } from "react-icons/fa";
-import AdminDashboard from "./AdminDashboard";
+import AdminDashboard from "./dashboard/AdminDashboard";
+import UserDashboard from "./dashboard/UserDashboard";
+import HouseOwnerDashboard from "./dashboard/HouseOwnerDashboard";
+import TenantDashboard from "./TenantDashboard";
 
 function Login() {
 
@@ -16,7 +19,7 @@ return (
    
 <div className="bg-white/10 backdrop-blur-2xl shadow-2xl rounded-3xl w-[420px] p-10 text-white border border-white/20">
 
-<h2 className="text-4xl font-bold text-center mb-2 bg-gradient-to-r from-blue-200 to-pink-200 bg-clip-text text-transparent">
+<h2 className="text-4xl font-bold text-center mb-2 text-white">
 Society Management
 </h2>
 

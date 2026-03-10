@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaHome, FaUsers, FaClipboard, FaTools, FaBell, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-import Footer from "../components/footer";
+import Footer from "../../components/footer";
 
 function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("houses");
@@ -64,7 +64,7 @@ function AdminDashboard() {
     <>
       <div className="min-h-screen bg-gray-900 text-white">
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-8 shadow-lg">
+        <div className="bg-blue-600 p-8 shadow-lg">
           <h1 className="text-4xl font-bold">Admin Dashboard</h1>
           <p className="text-blue-200 mt-2">Manage your society properties and residents</p>
         </div>
