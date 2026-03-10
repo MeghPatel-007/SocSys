@@ -1,6 +1,17 @@
 import { useState, useMemo } from "react";
-import { FaHome, FaMapMarkerAlt, FaRulerCombined, FaUser, FaPhone, FaEnvelope, FaFilter, FaSort, FaPlus } from "react-icons/fa";
+import {
+  FaHome,
+  FaMapMarkerAlt,
+  FaRulerCombined,
+  FaUser,
+  FaPhone,
+  FaEnvelope,
+  FaFilter,
+  FaSort,
+  FaPlus,
+} from "react-icons/fa";
 import Footer from "../../components/footer";
+import Navbar from "../../components/navbar";
 
 function UserDashboard() {
   const [activeTab, setActiveTab] = useState("sale");
@@ -23,22 +34,154 @@ function UserDashboard() {
 
   // Sample houses for sale
   const [housesForSale] = useState([
-    { id: 1, title: "Luxury Apartment", address: "123 Main St", bhk: "3BHK", price: 5000000, area: 1500, owner: "John Doe", phone: "555-0101", email: "john@example.com", image: "🏢" },
-    { id: 2, title: "Cozy Studio", address: "456 Oak Ave", bhk: "1BHK", price: 1500000, area: 600, owner: "Jane Smith", phone: "555-0102", email: "jane@example.com", image: "🏠" },
-    { id: 3, title: "Modern Villa", address: "789 Pine Rd", bhk: "4BHK", price: 8000000, area: 2500, owner: "Bob Johnson", phone: "555-0103", email: "bob@example.com", image: "🏡" },
-    { id: 4, title: "Spacious Flat", address: "321 Elm St", bhk: "2BHK", price: 3000000, area: 1000, owner: "Alice Brown", phone: "555-0104", email: "alice@example.com", image: "🏘️" },
-    { id: 5, title: "Compact Apartment", address: "654 Maple Lane", bhk: "1BHK", price: 1800000, area: 700, owner: "Charlie Davis", phone: "555-0105", email: "charlie@example.com", image: "🏢" },
-    { id: 6, title: "Premium Bungalow", address: "987 Birch St", bhk: "5BHK", price: 12000000, area: 3500, owner: "Eva Wilson", phone: "555-0106", email: "eva@example.com", image: "🏡" },
+    {
+      id: 1,
+      title: "Luxury Apartment",
+      address: "123 Main St",
+      bhk: "3BHK",
+      price: 5000000,
+      area: 1500,
+      owner: "John Doe",
+      phone: "555-0101",
+      email: "john@example.com",
+      image: "🏢",
+    },
+    {
+      id: 2,
+      title: "Cozy Studio",
+      address: "456 Oak Ave",
+      bhk: "1BHK",
+      price: 1500000,
+      area: 600,
+      owner: "Jane Smith",
+      phone: "555-0102",
+      email: "jane@example.com",
+      image: "🏠",
+    },
+    {
+      id: 3,
+      title: "Modern Villa",
+      address: "789 Pine Rd",
+      bhk: "4BHK",
+      price: 8000000,
+      area: 2500,
+      owner: "Bob Johnson",
+      phone: "555-0103",
+      email: "bob@example.com",
+      image: "🏡",
+    },
+    {
+      id: 4,
+      title: "Spacious Flat",
+      address: "321 Elm St",
+      bhk: "2BHK",
+      price: 3000000,
+      area: 1000,
+      owner: "Alice Brown",
+      phone: "555-0104",
+      email: "alice@example.com",
+      image: "🏘️",
+    },
+    {
+      id: 5,
+      title: "Compact Apartment",
+      address: "654 Maple Lane",
+      bhk: "1BHK",
+      price: 1800000,
+      area: 700,
+      owner: "Charlie Davis",
+      phone: "555-0105",
+      email: "charlie@example.com",
+      image: "🏢",
+    },
+    {
+      id: 6,
+      title: "Premium Bungalow",
+      address: "987 Birch St",
+      bhk: "5BHK",
+      price: 12000000,
+      area: 3500,
+      owner: "Eva Wilson",
+      phone: "555-0106",
+      email: "eva@example.com",
+      image: "🏡",
+    },
   ]);
 
   // Sample houses for rent
   const [housesForRent] = useState([
-    { id: 1, title: "Downtown Apartment", address: "111 Center St", bhk: "2BHK", price: 25000, area: 1000, owner: "Frank Miller", phone: "555-0201", email: "frank@example.com", image: "🏢" },
-    { id: 2, title: "Hill View Studio", address: "222 Hill Rd", bhk: "1BHK", price: 12000, area: 500, owner: "Grace Lee", phone: "555-0202", email: "grace@example.com", image: "🏠" },
-    { id: 3, title: "Beachfront Villa", address: "333 Beach Ave", bhk: "3BHK", price: 40000, area: 1800, owner: "Henry Brown", phone: "555-0203", email: "henry@example.com", image: "🏡" },
-    { id: 4, title: "Garden Apartment", address: "444 Garden St", bhk: "2BHK", price: 22000, area: 950, owner: "Iris Chen", phone: "555-0204", email: "iris@example.com", image: "🏘️" },
-    { id: 5, title: "Minimalist Studio", address: "555 Modern Lane", bhk: "1BHK", price: 15000, area: 700, owner: "Jack Wilson", phone: "555-0205", email: "jack@example.com", image: "🏢" },
-    { id: 6, title: "Luxury Penthouse", address: "666 Sky Tower", bhk: "4BHK", price: 60000, area: 2200, owner: "Kate Johnson", phone: "555-0206", email: "kate@example.com", image: "🏡" },
+    {
+      id: 1,
+      title: "Downtown Apartment",
+      address: "111 Center St",
+      bhk: "2BHK",
+      price: 25000,
+      area: 1000,
+      owner: "Frank Miller",
+      phone: "555-0201",
+      email: "frank@example.com",
+      image: "🏢",
+    },
+    {
+      id: 2,
+      title: "Hill View Studio",
+      address: "222 Hill Rd",
+      bhk: "1BHK",
+      price: 12000,
+      area: 500,
+      owner: "Grace Lee",
+      phone: "555-0202",
+      email: "grace@example.com",
+      image: "🏠",
+    },
+    {
+      id: 3,
+      title: "Beachfront Villa",
+      address: "333 Beach Ave",
+      bhk: "3BHK",
+      price: 40000,
+      area: 1800,
+      owner: "Henry Brown",
+      phone: "555-0203",
+      email: "henry@example.com",
+      image: "🏡",
+    },
+    {
+      id: 4,
+      title: "Garden Apartment",
+      address: "444 Garden St",
+      bhk: "2BHK",
+      price: 22000,
+      area: 950,
+      owner: "Iris Chen",
+      phone: "555-0204",
+      email: "iris@example.com",
+      image: "🏘️",
+    },
+    {
+      id: 5,
+      title: "Minimalist Studio",
+      address: "555 Modern Lane",
+      bhk: "1BHK",
+      price: 15000,
+      area: 700,
+      owner: "Jack Wilson",
+      phone: "555-0205",
+      email: "jack@example.com",
+      image: "🏢",
+    },
+    {
+      id: 6,
+      title: "Luxury Penthouse",
+      address: "666 Sky Tower",
+      bhk: "4BHK",
+      price: 60000,
+      area: 2200,
+      owner: "Kate Johnson",
+      phone: "555-0206",
+      email: "kate@example.com",
+      image: "🏡",
+    },
   ]);
 
   const filterOptions = {
@@ -64,11 +207,13 @@ function UserDashboard() {
     const price = house.price;
     if (activeTab === "sale") {
       if (selectedFilters.priceRange === "low") return price < 2500000;
-      if (selectedFilters.priceRange === "medium") return price >= 2500000 && price <= 5000000;
+      if (selectedFilters.priceRange === "medium")
+        return price >= 2500000 && price <= 5000000;
       if (selectedFilters.priceRange === "high") return price > 5000000;
     } else {
       if (selectedFilters.priceRange === "low") return price < 20000;
-      if (selectedFilters.priceRange === "medium") return price >= 20000 && price <= 40000;
+      if (selectedFilters.priceRange === "medium")
+        return price >= 20000 && price <= 40000;
       if (selectedFilters.priceRange === "high") return price > 40000;
     }
     return true;
@@ -130,7 +275,13 @@ function UserDashboard() {
   };
 
   const handleSubmitOffer = () => {
-    if (offerForm.fullName && offerForm.email && offerForm.phone && offerForm.offerAmount && offerForm.description) {
+    if (
+      offerForm.fullName &&
+      offerForm.email &&
+      offerForm.phone &&
+      offerForm.offerAmount &&
+      offerForm.description
+    ) {
       const newOffer = {
         id: Date.now(),
         houseName: selectedHouse.title,
@@ -144,13 +295,18 @@ function UserDashboard() {
         offerType: activeTab === "sale" ? "Buy" : "Rent",
         offerAmount: offerForm.offerAmount,
         description: offerForm.description,
-        date: new Date().toISOString().split('T')[0],
+        date: new Date().toISOString().split("T")[0],
         status: "New",
       };
 
       // Save to localStorage
-      const existingOffers = JSON.parse(localStorage.getItem('propertyOffers') || '[]');
-      localStorage.setItem('propertyOffers', JSON.stringify([newOffer, ...existingOffers]));
+      const existingOffers = JSON.parse(
+        localStorage.getItem("propertyOffers") || "[]",
+      );
+      localStorage.setItem(
+        "propertyOffers",
+        JSON.stringify([newOffer, ...existingOffers]),
+      );
 
       // Reset form
       setOfferForm({
@@ -171,23 +327,47 @@ function UserDashboard() {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-900 text-white">
+      <Navbar />
+      <div className="dashboard-page min-h-screen text-white">
         {/* Header */}
-        <div className="bg-blue-600 p-8 shadow-lg">
-          <h1 className="text-4xl font-bold">Property Dashboard</h1>
-          <p className="text-blue-100 mt-2">Find your perfect home</p>
+        <div className="dashboard-hero p-8 shadow-lg">
+          <div className="max-w-7xl mx-auto">
+            <p className="dashboard-eyebrow">Marketplace Explorer</p>
+            <div className="dashboard-hero-row">
+              <div>
+                <h1 className="text-4xl font-bold">Property Dashboard</h1>
+                <p className="text-blue-100 mt-2">
+                  Find your perfect home with smarter filtering
+                </p>
+              </div>
+              <div className="dashboard-kpis">
+                <article className="dashboard-kpi">
+                  <span>For Sale</span>
+                  <strong>{housesForSale.length}</strong>
+                </article>
+                <article className="dashboard-kpi">
+                  <span>For Rent</span>
+                  <strong>{housesForRent.length}</strong>
+                </article>
+                <article className="dashboard-kpi">
+                  <span>Current Results</span>
+                  <strong>{filteredAndSortedHouses.length}</strong>
+                </article>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Tab Navigation */}
-        <div className="sticky top-0 bg-gray-800 border-b border-gray-700 shadow-lg z-10">
+        <div className="dashboard-topnav sticky top-0 shadow-lg z-10">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="flex space-x-8">
+            <div className="flex space-x-8 overflow-x-auto">
               <button
                 onClick={() => {
                   setActiveTab("sale");
                   clearFilters();
                 }}
-                className={`py-4 px-2 font-semibold transition-all border-b-2 flex items-center space-x-2 ${
+                className={`dashboard-tab py-4 px-2 font-semibold transition-all border-b-2 flex items-center space-x-2 whitespace-nowrap ${
                   activeTab === "sale"
                     ? "border-blue-500 text-blue-400"
                     : "border-transparent text-gray-400 hover:text-white"
@@ -200,7 +380,7 @@ function UserDashboard() {
                   setActiveTab("rent");
                   clearFilters();
                 }}
-                className={`py-4 px-2 font-semibold transition-all border-b-2 flex items-center space-x-2 ${
+                className={`dashboard-tab py-4 px-2 font-semibold transition-all border-b-2 flex items-center space-x-2 whitespace-nowrap ${
                   activeTab === "rent"
                     ? "border-blue-500 text-blue-400"
                     : "border-transparent text-gray-400 hover:text-white"
@@ -213,7 +393,7 @@ function UserDashboard() {
         </div>
 
         {/* Main Content */}
-        <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="dashboard-content max-w-7xl mx-auto px-6 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Sidebar Filters */}
             <div className="lg:col-span-1">
@@ -225,10 +405,15 @@ function UserDashboard() {
 
                 {/* BHK Filter */}
                 <div className="mb-6">
-                  <h4 className="font-semibold text-blue-400 mb-3">Property Type</h4>
+                  <h4 className="font-semibold text-blue-400 mb-3">
+                    Property Type
+                  </h4>
                   <div className="space-y-2">
                     {filterOptions.bhk.map((bhk) => (
-                      <label key={bhk} className="flex items-center space-x-3 cursor-pointer hover:text-green-400 transition">
+                      <label
+                        key={bhk}
+                        className="flex items-center space-x-3 cursor-pointer hover:text-green-400 transition"
+                      >
                         <input
                           type="checkbox"
                           checked={selectedFilters.bhk.includes(bhk)}
@@ -243,10 +428,15 @@ function UserDashboard() {
 
                 {/* Price Range Filter */}
                 <div className="mb-6">
-                  <h4 className="font-semibold text-blue-400 mb-3">Price Range</h4>
+                  <h4 className="font-semibold text-blue-400 mb-3">
+                    Price Range
+                  </h4>
                   <div className="space-y-2">
                     {filterOptions.priceRange.map((option) => (
-                      <label key={option.value} className="flex items-center space-x-3 cursor-pointer hover:text-green-400 transition">
+                      <label
+                        key={option.value}
+                        className="flex items-center space-x-3 cursor-pointer hover:text-green-400 transition"
+                      >
                         <input
                           type="radio"
                           name="priceRange"
@@ -276,7 +466,11 @@ function UserDashboard() {
               {/* Sort Options */}
               <div className="mb-6 flex items-center justify-between">
                 <p className="text-gray-400">
-                  Showing <span className="font-bold text-white">{filteredAndSortedHouses.length}</span> properties
+                  Showing{" "}
+                  <span className="font-bold text-white">
+                    {filteredAndSortedHouses.length}
+                  </span>{" "}
+                  properties
                 </p>
                 <div className="flex items-center space-x-3">
                   <FaSort className="text-blue-400" />
@@ -307,7 +501,9 @@ function UserDashboard() {
 
                       {/* Content Section */}
                       <div className="p-6">
-                        <h3 className="text-xl font-bold mb-2">{house.title}</h3>
+                        <h3 className="text-xl font-bold mb-2">
+                          {house.title}
+                        </h3>
 
                         {/* Location */}
                         <div className="flex items-center text-gray-400 mb-4">
@@ -318,8 +514,12 @@ function UserDashboard() {
                         {/* Property Details */}
                         <div className="grid grid-cols-2 gap-4 mb-4 pb-4 border-b border-gray-700">
                           <div>
-                            <p className="text-gray-400 text-xs mb-1">Property Type</p>
-                            <p className="font-semibold text-blue-400">{house.bhk}</p>
+                            <p className="text-gray-400 text-xs mb-1">
+                              Property Type
+                            </p>
+                            <p className="font-semibold text-blue-400">
+                              {house.bhk}
+                            </p>
                           </div>
                           <div>
                             <p className="text-gray-400 text-xs mb-1">Area</p>
@@ -339,7 +539,9 @@ function UserDashboard() {
                           </div>
                           <div className="flex items-center space-x-2 text-sm text-gray-300">
                             <FaEnvelope className="text-blue-400" />
-                            <span className="break-all text-xs">{house.email}</span>
+                            <span className="break-all text-xs">
+                              {house.email}
+                            </span>
                           </div>
                         </div>
 
@@ -349,10 +551,12 @@ function UserDashboard() {
                             <p className="text-gray-400 text-xs mb-1">
                               {activeTab === "sale" ? "Price" : "Rent"}
                             </p>
-                            <p className="text-2xl font-bold text-blue-400">{formatPrice(house.price)}</p>
+                            <p className="text-2xl font-bold text-blue-400">
+                              {formatPrice(house.price)}
+                            </p>
                           </div>
                           <div className="flex space-x-2">
-                            <button 
+                            <button
                               onClick={() => {
                                 setSelectedHouse(house);
                                 setShowOfferForm(true);
@@ -373,7 +577,9 @@ function UserDashboard() {
               ) : (
                 <div className="text-center py-16">
                   <FaHome className="text-6xl text-gray-600 mx-auto mb-4" />
-                  <p className="text-gray-400 text-lg">No properties found matching your filters.</p>
+                  <p className="text-gray-400 text-lg">
+                    No properties found matching your filters.
+                  </p>
                   <button
                     onClick={clearFilters}
                     className="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold transition"
@@ -406,18 +612,29 @@ function UserDashboard() {
               <div className="p-6 space-y-4">
                 {/* Property Details */}
                 <div className="bg-gray-900 rounded-lg p-4 mb-4">
-                  <h3 className="font-semibold text-lg mb-2">{selectedHouse.title}</h3>
-                  <p className="text-gray-400 text-sm">{selectedHouse.address}</p>
-                  <p className="text-gray-400 text-sm mt-2">Owner: <span className="text-blue-400">{selectedHouse.owner}</span></p>
+                  <h3 className="font-semibold text-lg mb-2">
+                    {selectedHouse.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm">
+                    {selectedHouse.address}
+                  </p>
+                  <p className="text-gray-400 text-sm mt-2">
+                    Owner:{" "}
+                    <span className="text-blue-400">{selectedHouse.owner}</span>
+                  </p>
                 </div>
 
                 {/* Form Fields */}
                 <div>
-                  <label className="block text-gray-400 text-sm mb-2">Full Name</label>
+                  <label className="block text-gray-400 text-sm mb-2">
+                    Full Name
+                  </label>
                   <input
                     type="text"
                     value={offerForm.fullName}
-                    onChange={(e) => setOfferForm({ ...offerForm, fullName: e.target.value })}
+                    onChange={(e) =>
+                      setOfferForm({ ...offerForm, fullName: e.target.value })
+                    }
                     className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500"
                     placeholder="Your full name"
                   />
@@ -425,21 +642,29 @@ function UserDashboard() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-gray-400 text-sm mb-2">Email</label>
+                    <label className="block text-gray-400 text-sm mb-2">
+                      Email
+                    </label>
                     <input
                       type="email"
                       value={offerForm.email}
-                      onChange={(e) => setOfferForm({ ...offerForm, email: e.target.value })}
+                      onChange={(e) =>
+                        setOfferForm({ ...offerForm, email: e.target.value })
+                      }
                       className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500"
                       placeholder="Your email"
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-400 text-sm mb-2">Phone</label>
+                    <label className="block text-gray-400 text-sm mb-2">
+                      Phone
+                    </label>
                     <input
                       type="tel"
                       value={offerForm.phone}
-                      onChange={(e) => setOfferForm({ ...offerForm, phone: e.target.value })}
+                      onChange={(e) =>
+                        setOfferForm({ ...offerForm, phone: e.target.value })
+                      }
                       className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500"
                       placeholder="Your phone number"
                     />
@@ -448,22 +673,40 @@ function UserDashboard() {
 
                 <div>
                   <label className="block text-gray-400 text-sm mb-2">
-                    {activeTab === "sale" ? "Offer Price" : "Monthly Rent Offer"}
+                    {activeTab === "sale"
+                      ? "Offer Price"
+                      : "Monthly Rent Offer"}
                   </label>
                   <input
                     type="number"
                     value={offerForm.offerAmount}
-                    onChange={(e) => setOfferForm({ ...offerForm, offerAmount: e.target.value })}
+                    onChange={(e) =>
+                      setOfferForm({
+                        ...offerForm,
+                        offerAmount: e.target.value,
+                      })
+                    }
                     className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500"
-                    placeholder={activeTab === "sale" ? "Enter offer price" : "Enter monthly rent offer"}
+                    placeholder={
+                      activeTab === "sale"
+                        ? "Enter offer price"
+                        : "Enter monthly rent offer"
+                    }
                   />
                 </div>
 
                 <div>
-                  <label className="block text-gray-400 text-sm mb-2">Description / Message</label>
+                  <label className="block text-gray-400 text-sm mb-2">
+                    Description / Message
+                  </label>
                   <textarea
                     value={offerForm.description}
-                    onChange={(e) => setOfferForm({ ...offerForm, description: e.target.value })}
+                    onChange={(e) =>
+                      setOfferForm({
+                        ...offerForm,
+                        description: e.target.value,
+                      })
+                    }
                     className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500 h-32 resize-none"
                     placeholder="Explain why you're interested in this property and any relevant details..."
                   />
