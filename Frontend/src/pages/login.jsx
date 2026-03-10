@@ -1,5 +1,7 @@
 import { useState } from "react";
+import Footer from "../components/footer";
 import { FaUser, FaLock, FaEnvelope, FaPhone } from "react-icons/fa";
+import AdminDashboard from "./AdminDashboard";
 
 
 function Login() {
