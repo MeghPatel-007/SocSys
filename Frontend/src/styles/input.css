@@ -353,6 +353,43 @@ a {
   color: #8ca7c3;
 }
 
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.input-row--error {
+  border-color: rgba(255, 102, 102, 0.68);
+  background: rgba(255, 102, 102, 0.08);
+}
+
+.input-row--error:focus-within {
+  border-color: rgba(255, 102, 102, 0.88);
+  box-shadow: 0 0 0 3px rgba(255, 102, 102, 0.16);
+}
+
+.input-error {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: #ff6666;
+  padding: 0.2rem 0.4rem;
+  animation: slideIn 150ms ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .auth-submit {
   margin-top: 0.32rem;
   border: 0;
@@ -380,6 +417,60 @@ a {
   margin: 0;
   color: #a6bdd8;
   font-size: 0.86rem;
+}
+
+.auth-credentials {
+  margin-top: 1.2rem;
+  padding: 1rem;
+  background: rgba(73, 211, 211, 0.08);
+  border: 1px solid rgba(73, 211, 211, 0.24);
+  border-radius: 0.75rem;
+}
+
+.auth-credentials-title {
+  margin: 0 0 0.6rem 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #49d3d3;
+}
+
+.auth-credentials-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.auth-credential-item {
+  padding: 0.7rem;
+  background: rgba(12, 27, 52, 0.5);
+  border-radius: 0.6rem;
+  border: 1px solid rgba(73, 211, 211, 0.16);
+}
+
+.auth-credential-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.8rem;
+  margin: 0.3rem 0;
+}
+
+.auth-credential-label {
+  color: #7fa7c5;
+  font-weight: 500;
+}
+
+.auth-credential-value {
+  color: #49d3d3;
+  font-family: "Courier New", monospace;
+  font-weight: 600;
+}
+
+.auth-credential-role {
+  text-transform: capitalize;
+  background: rgba(73, 211, 211, 0.15);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.35rem;
 }
 
 .soc-navbar {
