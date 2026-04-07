@@ -13,6 +13,7 @@ dotenv.config({ path: path.join(__dirname, ".env") });
 const app = express();
 const PORT = process.env.PORT || 5000;
 const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || "http://localhost:3000";
+const IS_VERCEL = Boolean(process.env.VERCEL);
 
 const COMPLAINT_TABLE_SQL = `
   CREATE TABLE IF NOT EXISTS Complaint (
@@ -115,9 +116,30 @@ const PROPERTY_OFFER_TABLE_SQL = `
   )
 `;
 
+const allowedOrigins = Array.from(
+  new Set(
+    String(FRONTEND_ORIGIN || "")
+      .split(",")
+      .map((value) => value.trim())
+      .filter(Boolean),
+  ),
+);
+
 app.use(
   cors({
-    origin: [FRONTEND_ORIGIN],
+    origin(origin, callback) {
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+
+      if (allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   }),
 );
@@ -2951,20 +2973,45 @@ app.put("/api/tenant/profile/:id", async (req, res) => {
   }
 });
 
-async function startServer() {
-  try {
-    await connectDB();
+let appInitializationPromise;
 
-    if (getDBState().connected) {
-      await ensureAuxiliaryTables();
-    }
-  } catch (error) {
-    console.error(`PostgreSQL connection failed: ${error.message}`);
+async function initializeApp() {
+  if (appInitializationPromise) {
+    return appInitializationPromise;
   }
 
-  app.listen(PORT, () => {
-    console.log(`Express API running on http://localhost:${PORT}`);
-  });
+  appInitializationPromise = (async () => {
+    try {
+      await connectDB();
+
+      if (getDBState().connected) {
+        await ensureAuxiliaryTables();
+      }
+    } catch (error) {
+      console.error(`PostgreSQL connection failed: ${error.message}`);
+    }
+  })();
+
+  return appInitializationPromise;
 }
 
-startServer();
+async function startServer() {
+  try {
+    await initializeApp();
+
+    app.listen(PORT, () => {
+      console.log(`Express API running on http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error(`Failed to start local server: ${error.message}`);
+  }
+}
+
+export default async function handler(req, res) {
+  await initializeApp();
+  return app(req, res);
+}
+
+if (!IS_VERCEL) {
+  startServer();
+}

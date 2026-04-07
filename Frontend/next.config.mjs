@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+const backendBaseUrl =
+  process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
+
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
@@ -7,7 +10,7 @@ const nextConfig = {
     return [
       {
         source: "/express/:path*",
-        destination: "http://localhost:5000/:path*",
+        destination: `${backendBaseUrl}/:path*`,
       },
     ];
   },
