@@ -1,10 +1,13 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { FaBars, FaSignOutAlt, FaTimes, FaUsers } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
+import { isSupabaseConfigured, supabase } from "../lib/supabaseClient.js";
+import { useNavigate } from "react-router-dom";
 
 function Navbar({ links = [], sectionLabel = "Portal" }) {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isActiveLink = (path) => {
     const [targetPath, targetHash = ""] = path.split("#");
@@ -20,10 +23,25 @@ function Navbar({ links = [], sectionLabel = "Portal" }) {
     return !location.hash;
   };
 
-  const activeSection = useMemo(() => {
+  const activeSection = (() => {
     const matched = links.find((item) => isActiveLink(item.path));
     return matched ? matched.label : sectionLabel;
-  }, [location.pathname, location.hash, links, sectionLabel]);
+  })();
+
+  const handleLogout = async () => {
+    try {
+      if (isSupabaseConfigured && supabase) {
+        await supabase.auth.signOut();
+      }
+    } catch {
+      // Ignore sign-out failures and still clear local session.
+    }
+
+    localStorage.removeItem("socsysUser");
+    localStorage.removeItem("socsysSelectedRole");
+    setIsOpen(false);
+    navigate("/");
+  };
 
   return (
     <nav className="soc-navbar">
@@ -51,10 +69,10 @@ function Navbar({ links = [], sectionLabel = "Portal" }) {
         <div className="soc-navbar-meta">
           <span className="soc-navbar-pill">{activeSection}</span>
 
-          <Link to="/" className="soc-logout">
+          <button type="button" className="soc-logout" onClick={handleLogout}>
             <FaSignOutAlt />
             <span>Logout</span>
-          </Link>
+          </button>
 
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -79,14 +97,14 @@ function Navbar({ links = [], sectionLabel = "Portal" }) {
             </Link>
           ))}
 
-          <Link
-            to="/"
+          <button
+            type="button"
             className="soc-mobile-logout"
-            onClick={() => setIsOpen(false)}
+            onClick={handleLogout}
           >
             <FaSignOutAlt />
             <span>Logout</span>
-          </Link>
+          </button>
         </div>
       )}
     </nav>
