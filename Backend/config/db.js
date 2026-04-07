@@ -15,13 +15,14 @@ const dbState = {
 
 function getConnectionString() {
   const connectionString =
+    process.env.SUPABASE_POOLER_URL ||
     process.env.SUPABASE_DB_URL ||
     process.env.POSTGRES_URL ||
     process.env.DATABASE_URL;
 
   if (!connectionString) {
     throw new Error(
-      "SUPABASE_DB_URL or POSTGRES_URL is not set. Add it in Backend/.env",
+      "SUPABASE_POOLER_URL, SUPABASE_DB_URL, POSTGRES_URL, or DATABASE_URL is not set. Add it in Backend/.env",
     );
   }
 
@@ -87,8 +88,8 @@ export async function connectDB() {
     dbState.connected = false;
     dbState.name = null;
     dbState.error = error.message;
-    throw error;
     console.error(`[DB ERROR] ${error.message}`, error);
+    throw error;
   }
 
   pool.on("error", (error) => {

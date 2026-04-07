@@ -1147,6 +1147,7 @@ app.get("/api/dashboard-summary", (_req, res) => {
 app.get("/api/debug/db-status", (_req, res) => {
   const db = getDBState();
   const envCheck = {
+    SUPABASE_POOLER_URL: process.env.SUPABASE_POOLER_URL ? "SET" : "NOT SET",
     SUPABASE_DB_URL: process.env.SUPABASE_DB_URL ? "SET" : "NOT SET",
     POSTGRES_SSL: process.env.POSTGRES_SSL,
     VERCEL: process.env.VERCEL ? "true" : "false",
