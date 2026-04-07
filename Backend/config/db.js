@@ -88,6 +88,7 @@ export async function connectDB() {
     dbState.name = null;
     dbState.error = error.message;
     throw error;
+    console.error(`[DB ERROR] ${error.message}`, error);
   }
 
   pool.on("error", (error) => {

@@ -1144,6 +1144,21 @@ app.get("/api/dashboard-summary", (_req, res) => {
   });
 });
 
+app.get("/api/debug/db-status", (_req, res) => {
+  const db = getDBState();
+  const envCheck = {
+    SUPABASE_DB_URL: process.env.SUPABASE_DB_URL ? "SET" : "NOT SET",
+    POSTGRES_SSL: process.env.POSTGRES_SSL,
+    VERCEL: process.env.VERCEL ? "true" : "false",
+  };
+
+  res.status(200).json({
+    dbState: db,
+    envCheck: envCheck,
+    timestamp: new Date().toISOString(),
+  });
+});
+
 app.get("/api/admin/houses", async (_req, res) => {
   if (!ensureDatabaseConnected(res)) {
     return;
